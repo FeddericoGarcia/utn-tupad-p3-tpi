@@ -4,35 +4,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>🍕 Login | Food Store 🍕</title>
+    <link href="../../../style.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/2223cc897f.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
-    <h1> Login</h1>
+    <div class="bg-login">
+        <!--BACKGROUND IMG-->
+    </div>
+    <section class="login-main">
+        <div class="login-card bg-blur">
+            <h1 class="card-title montserrat">
+                🍕 Food Store 🍕
+            </h1>
+            <h3 class="card-subtitle montserrat">
+                Iniciar Sesión
+            </h3>
+            <form id="form" class="login-form ">
+                <label for="input-email" class="label-email montserrat">
+                    Email
+                </label>
+                <div class="div-input montserrat">
+                    <i class="fa-solid fa-user"></i>
+                    <input id="input-email" name="email" type="email" autocomplete="off" required title="Ingresa tu correo"
+                        placeholder="feddericogarcia@example.com">
+                </div>
+                <label for="input-pass" class="label-pass montserrat">
+                    Contraseña
+                </label>
+                <div class="div-input montserrat">
+                    <i class="fa-solid fa-unlock-keyhole"></i>
+                    <input id="input-pass" name="password" type="password" autocomplete="off" required minlength="8" pattern=".{8,}" title="Minimo 8 carácteres"
+                        placeholder="Minimo 8 carácteres">
+                </div>
 
-    <form id="form">
+<!--                 <label for="rol" class="label-rol montserrat">
+                    Rol
+                </label>
+                <div class="div-input montserrat">
+                    <i class="fa-solid fa-arrows-down-to-people"></i>
+                    <select name="rol" id="rol" class="input-select">
+                        <option value="">Seleccione un rol</option>
+                        <option value="client">Cliente</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div> -->
 
-        <div>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" autocomplete="off" placeholder="example@example.com">
+                <div class="forget-pass montserrat">
+                    <a href="pag404.html" target="_blank">
+                        ¿Olvidaste tu contraseña?
+                    </a>
+                </div>
+                <button type="submit" class="form-btn">
+                    Ingresar
+                </button>
+                <div class="create-account montserrat">
+                    ¿No tenes cuenta?
+                    <a href="pag404.html" target="_blank">
+                        Registrate acá
+                    </a>
+                </div>
+            </form>
         </div>
-        <div>
-            <label for="password">password</label>
-            <input type="password" id="password" name="password" autocomplete="off" placeholder="********">
+    </section>
+    <footer class="footer montserrat">
+        <div class="footer-company">
+            © 2026 Food Store. Todos los derechos reservados
         </div>
-        <div>
-            <label for="rol">Rol</label>
-            <select name="rol" id="rol">
-                <option value="">Seleccione un rol</option>
-                <option value="client">Cliente</option>
-                <option value="admin">Admin</option>
-            </select>
-        </div>
-
-        <button type="submit">Ingresar</button>
-
-    </form>
-
+    </footer>
+    <script type="module" src="../../../main.ts"></script>
     <script type="module" src="./login.ts"></script>
 </body>
 

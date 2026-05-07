@@ -1,4 +1,10 @@
-import { checkAuhtUser, logout } from "../../../utils/auth";
+import { checkAuthUser, logout } from "../../../utils/auth";
+
+checkAuthUser(
+  "/src/pages/auth/login/login.html", 
+  "/src/pages/client/home/home.html", 
+  "admin"
+);
 
 const buttonLogout = document.getElementById(
   "logoutButton"
@@ -8,12 +14,3 @@ buttonLogout?.addEventListener("click", () => {
 });
 
 
-const initPage = () => {
-  console.log("inicio de pagina");
-  checkAuhtUser(
-    "/src/pages/auth/login/login.html",
-    "/src/pages/client/home/home.html",
-    "admin"
-  );
-};
-initPage();

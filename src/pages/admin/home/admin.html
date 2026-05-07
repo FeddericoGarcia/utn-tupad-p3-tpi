@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍕 Admin | Food Store 🍕</title>
+    <link href="../../../style.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1 class="title-header">
+            ⚙️ Panel Administrador ⚙️
+        </h1>
+        <nav class="nav-header">
+            <ul class="list-nav-header">
+                <li class="item-list-nav-header">
+                    <a href="index.html">
+                        Volver a la Tienda
+                    </a>
+                </li>
+                <li class="item-list-nav-header">
+                    <a href="">
+                        Cerrar sesión
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <hr>
+    <section class="section-management-product">
+        <h3 class="title-management-product">
+            Gestión de Productos
+        </h3>
+        <button class="add-new-product">
+            + Nuevo Producto
+        </button>
+        <br>
+        <br>
+        <table class="table-product" border="1" rules="all">
+            <thead>
+                <tr>
+                    <th class="table-th-product">ID</th>
+                    <th class="table-th-product">Imagen</th>
+                    <th class="table-th-product">Nombre</th>
+                    <th class="table-th-product">Categoría</th>
+                    <th class="table-th-product">Precio</th>
+                    <th class="table-th-product">Stock</th>
+                    <th class="table-th-product">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="article-1-admin">
+                    <td class="table-td-product-1">1</td>
+                    <td class="table-td-product-1">IMG</td>
+                    <td class="table-td-product-1">Hamburguesas Triples</td>
+                    <td class="table-td-product-1">Hamburguesas</td>
+                    <td class="table-td-product-1">$25000</td>
+                    <td class="table-td-product-1">12</td>
+                    <td class="table-td-product-1">
+                        <a href="">Editar</a> |
+                        <a href="">Eliminar</a>
+                    </td>
+                </tr>
+                <tr class="article-2-admin">
+                    <td class="table-td-product-2">2</td>
+                    <td class="table-td-product-2">IMG</td>
+                    <td class="table-td-product-2">Pizza Muzzarella</td>
+                    <td class="table-td-product-2">Pizza Muzzarella</td>
+                    <td class="table-td-product-2">$18000</td>
+                    <td class="table-td-product-2">5</td>
+                    <td class="table-td-product-2">
+                        <a href="">Editar</a> |
+                        <a href="">Eliminar</a>
+                    </td>
+                </tr>
+                <tr class="article-3-admin">
+                    <td class="table-td-product-3">3</td>
+                    <td class="table-td-product-3">IMG</td>
+                    <td class="table-td-product-3">Papas con Cheddar</td>
+                    <td class="table-td-product-3">Papas Fritas</td>
+                    <td class="table-td-product-3">$800</td>
+                    <td class="table-td-product-3">0</td>
+                    <td class="table-td-product-3">
+                        <a href="">Editar</a> |
+                        <a href="">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <hr>
+    <h4>
+        ✍️ Agrega Productos Rápidamente:
+    </h4>
+    <form class="form-detalis-product">
+        <div>
+            <label for="add-product-name">
+                Nombre del producto:
+            </label>
+            <br>
+            <input type="text" id="add-product-name" class="input-price-name" placeholder="Ej: Lomito Completo">
+            <br>
+        </div>
+        <div>
+            <label for="add-product-price">
+                Precio:
+            </label>
+            <br>
+            <input type="number" id="add-product-price" class="input-product-price" placeholder="$10.000,00">
+            <br>
+        </div>
+        <div>
+            <label for="add-product-stock">
+                Stock inicial:
+            </label>
+            <br>
+            <input type="number" id="add-product-stock" class="input-product-stock" placeholder="100 unidades">
+            <br>
+        </div>
+        <div>
+            <label for="add-product-name">
+                Categoría:
+            </label>
+            <br>
+            <input type="text" id="add-product-name" class="input-product-name" placeholder="Sandwichs">
+            <br>
+        </div>
+        <div>
+            <label for="add-product-name">
+                Ingresar ingredientes:
+            </label>
+            <br>
+            <textarea type="select" id="add-product-name" class="input-product-name"
+                placeholder="Ej: Lomito Completo"></textarea>
+            <br>
+        </div>
+        <button type="submit">
+            Guardar Producto
+        </button>
+    </form>
+    <footer class="footer-admin">
+        <p class="p-footer-admin">
+            Panel de Administrador | Food Store v1.0
+        </p>
+    </footer>
+</body>
+
+</html>
