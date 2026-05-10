@@ -2,7 +2,7 @@ import { checkAuthUser, logout } from "../../../utils/auth";
 
 checkAuthUser(
   "/src/pages/auth/login/login.html", 
-  "/src/pages/client/home/home.html", 
+  "/src/pages/store/home/home.html", 
   "admin"
 );
 

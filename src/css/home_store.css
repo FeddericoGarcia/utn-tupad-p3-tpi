@@ -1,0 +1,210 @@
+:root {
+    --color-primario: #ff6347;
+    --color-focus: #ff4500;
+    --color-negro: #0b0b0b;
+    --text-gray: #666;
+    --light-gray: #f4f4f4;
+    --white: #ffffff;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Header Estilo FoodStore */
+header {
+    background-color: var(--color-primario);
+    color: var(--white);
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.logo {
+    font-size: 1.5rem;
+    text-shadow: 2px 2px 1px var(--color-texto);
+    cursor: default;
+}
+
+nav button {
+    border: none;
+    background: none;
+    color: var(--white);
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a,
+nav button {
+    text-transform: uppercase;
+    color: var(--white);
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: .8rem;
+    border: 2px solid transparent;
+    padding-bottom: .35rem;
+}
+
+nav a:hover,
+nav button:hover {
+    cursor: pointer;
+    border-bottom: 2px solid var(--color-negro);
+}
+
+#cart-count {
+    background-color: var(--color-focus);
+    color: var(--white);
+    border-radius: 50%;
+    padding: 5px 10px;
+    font-size: .9rem;
+}
+
+/* Layout Principal */
+.main-layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.sidebar {
+    width: 200px;
+    padding: 2rem 1rem;
+    border-right: 1px solid #eee;
+    background: var(--white);
+}
+
+.category-list {
+    list-style: none;
+    padding: 0;
+}
+
+.category-item {
+    padding: 10px 15px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    border-radius: 8px;
+    color: var(--text-gray);
+    transition: all 0.3s;
+}
+
+.category-item.active {
+    background-color: var(--color-focus);
+    color: var(--white);
+}
+
+.content-area {
+    flex: 1;
+    padding: 1rem 2rem;
+    overflow-y: auto;
+    background-color: #fafafa;
+}
+
+.search-bar {
+    width: 100%;
+    max-width: 500px;
+    padding: 12px 20px;
+    border-radius: 25px;
+    border: 1px solid #ddd;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+}
+
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-img img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 1rem;
+}
+
+.category-tag {
+    font-size: 0.7rem;
+    color: #a44;
+    font-weight: bold;
+}
+
+.card h3 {
+    margin: 5px 0;
+    font-size: 1.1rem;
+}
+
+.card p {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    height: 40px;
+    overflow: hidden;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.price {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.btn-add {
+    background-color: var(--color-primario);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-add:hover {
+    background-color: var(--color-focus);
+}
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+    margin-top: 1.3rem;
+}
+
+.footer-company {
+    color: var(--color-texto);
+    background-color: var(--color-blanco);
+    width: 100%;
+    font-weight: 700;
+    align-self: center;
+    padding: .7rem;
+}

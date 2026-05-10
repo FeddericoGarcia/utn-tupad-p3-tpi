@@ -10,7 +10,7 @@ export const seedLocalStorage = (): void => {
       },
       {
         email: "federico@test.com",
-        password: "12345678",
+        password: "123456",
         role: "client"
       },
       {

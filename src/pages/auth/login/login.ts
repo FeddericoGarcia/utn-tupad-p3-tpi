@@ -24,7 +24,7 @@ form.addEventListener("submit", (e: SubmitEvent) => {
     localStorage.setItem("userData", JSON.stringify(userFound));
 
     if (userFound.role === "client") {
-      navigate("/src/pages/client/home/home.html");
+      navigate("/src/pages/store/home/home.html");
     } else {
       navigate("/src/pages/admin/home/home.html");
     }

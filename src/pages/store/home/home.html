@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍕 Catálogo | FoodStore 🍕</title>
+    <link href="../../../css/home_store.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="logo">Food<b>Store</b></div>
+        <nav id="nav-menu">
+            <a href="../home/home.html">Catálogo</a>
+            <a href="../cart/cart.html">Carrito <span id="cart-count">0</span></a>
+            <button id="logoutButton">Cerrar sesión</button>
+        </nav>
+    </header>
+
+    <div class="main-layout">
+        <aside class="sidebar">
+            <h4>CATEGORÍAS</h4>
+            <ul class="category-list" id="category-list">
+                <li class="category-item active">Todos los productos</li>
+                <li class="category-item">Pizzas</li>
+                <li class="category-item">Hamburguesas</li>
+                <li class="category-item">Empanadas</li>
+                <li class="category-item">Ensaladas</li>
+                <li class="category-item">Bebidas</li>
+            </ul>
+        </aside>
+
+        <main class="content-area">
+            <input type="text" id="search-input" class="search-bar" placeholder="Buscar productos...">
+            <div class="product-grid" id="product-grid">
+            </div>
+        </main>
+    </div>
+    <footer class="footer montserrat">
+        <div class="footer-company">
+            © 2026 Food Store. Todos los derechos reservados
+        </div>
+    </footer>
+    <script type="module" src="./home.ts"></script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍕Carrito | FoodStore 🍕</title>
+    <link href="../../../css/cart_store.css" rel="stylesheet">
+    <link href="../../../css/home_store.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="logo">Food<b>Store</b></div>
+        <nav id="nav-menu">
+            <a href="../home/home.html">Catálogo</a>
+            <a href="../cart/cart.html">Carrito <span id="cart-count">0</span></a>
+            <button id="logoutButton">Cerrar sesión</button>
+        </nav>
+    </header>
+    <div class="bg-store"></div>
+    <div class="cart-container">
+        <div class="cart-main">
+            <h2>Tu Carrito</h2>
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio individual</th>
+                        <th>Cantidad</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-items">
+                </tbody>
+            </table>
+        </div>
+
+        <div class="cart-summary">
+            <h3>Resumen de compra</h3>
+            <div class="summary-item">
+                <span>Subtotal</span>
+                <span id="summary-subtotal">$0.00</span>
+            </div>
+            <div class="summary-item total">
+                <span>Total</span>
+                <span id="cart-total">$0.00</span>
+            </div>
+            <button class="btn-checkout">Finalizar Compra</button>
+            <a href="../home/home.html" class="btn-back">← Continuar comprando</a>
+        </div>
+    </div>
+    <footer class="footer montserrat">
+        <div class="footer-company">
+            © 2026 Food Store. Todos los derechos reservados
+        </div>
+    </footer>
+    <script type="module" src="./cart.ts"></script>
+</body>
+
+</html>
