@@ -1,34 +1,52 @@
-import type { IUser } from "../../../types/IUser";
-import { navigate } from "../../../utils/navigate";
+// src/pages/auth/login/login.ts
+import type { IUsuario } from '../../../types/types';
+import { setSession, getSession } from '../../../utils/auth';
+import { getUsuarios } from '../../../utils/api';
 
-const form = document.getElementById("form") as HTMLFormElement;
-const inputEmail = document.getElementById("input-email") as HTMLInputElement;
-const inputPassword = document.getElementById("input-pass") as HTMLInputElement;
+// Si ya hay sesión activa, redirigir directamente
+const session = getSession();
+if (session) {
+  window.location.href = session.rol === 'ADMIN'
+    ? '/src/pages/admin/adminHome/adminHome.html'
+    : '/src/pages/store/home/home.html';
+}
 
-form.addEventListener("submit", (e: SubmitEvent) => {
-  console.log("📝 Formulario enviado. Procesando autenticación...");
+const form = document.getElementById('loginForm') as HTMLFormElement;
+const inputEmail = document.getElementById('inputEmail') as HTMLInputElement;
+const inputPassword = document.getElementById('inputPassword') as HTMLInputElement;
+const errorMsg = document.getElementById('loginError') as HTMLElement;
+
+form.addEventListener('submit', async (e: SubmitEvent) => {
   e.preventDefault();
+  errorMsg.style.display = 'none';
 
-  const valueEmail = inputEmail.value;
-  const valuePassword = inputPassword.value;
+  const email = inputEmail.value.trim().toLowerCase();
+  const password = inputPassword.value;
 
-  const storedUsers: IUser[] = JSON.parse(localStorage.getItem("users") || "[]");
-  console.log("📂 Usuarios almacenados en localStorage:", storedUsers);
+  try {
+    // Fetch a /data/usuarios.json  (en la siguiente iteración: fetch('/api/usuarios'))
+    const usuarios: IUsuario[] = await getUsuarios();
 
-  const userFound = storedUsers.find(
-    (u) => u.email === valueEmail && u.password === valuePassword
-  );
-  console.log("🔍 Buscando usuario con email:", userFound);
+    const found = usuarios.find(
+      u => u.mail.toLowerCase() === email && u.password === password
+    );
 
-  if (userFound) {
-    localStorage.setItem("userData", JSON.stringify(userFound));
-
-    if (userFound.role === "client") {
-      navigate("/src/pages/store/home/home.html");
-    } else {
-      navigate("/src/pages/admin/home/home.html");
+    if (!found) {
+      errorMsg.style.display = 'block';
+      return;
     }
-  } else {
-    alert("Email o contraseña incorrectos. Por favor, revise los datos ingresados.");
+
+    // Guardar sesión sin password
+    const { password: _, ...sessionData } = found;
+    setSession(sessionData);
+
+    window.location.href = found.rol === 'ADMIN'
+      ? '/src/pages/admin/adminHome/adminHome.html'
+      : '/src/pages/store/home/home.html';
+
+  } catch (err) {
+    console.error('Error al cargar usuarios:', err);
+    errorMsg.textContent = 'Error al conectar. Intente de nuevo.';
+    errorMsg.style.display = 'block';
   }
 });

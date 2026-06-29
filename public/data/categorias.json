@@ -1,0 +1,7 @@
+[
+  { "id": 1, "nombre": "Pizzas",       "descripcion": "Pizzas artesanales con masa fresca",             "imagen": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400", "eliminado": false },
+  { "id": 2, "nombre": "Hamburguesas", "descripcion": "Hamburguesas gourmet con ingredientes frescos",  "imagen": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400", "eliminado": false },
+  { "id": 3, "nombre": "Bebidas",      "descripcion": "Gaseosas, jugos y bebidas frías",               "imagen": "https://images.unsplash.com/photo-1534353436294-0dbd4bdac845?w=400", "eliminado": false },
+  { "id": 4, "nombre": "Postres",      "descripcion": "Tortas, helados y dulces artesanales",          "imagen": "https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400", "eliminado": false },
+  { "id": 5, "nombre": "Empanadas",    "descripcion": "Empanadas horneadas y fritas de distintos sabores","imagen": "https://images.unsplash.com/photo-1604467794349-0b74285de7e7?w=400","eliminado": false }
+]

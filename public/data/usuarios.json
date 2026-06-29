@@ -1,0 +1,5 @@
+[
+  { "id": 1, "nombre": "Federico", "apellido": "García",  "mail": "admin@foodstore.com",  "celular": "351-111-2222", "password": "admin123",  "rol": "ADMIN"   },
+  { "id": 2, "nombre": "Juan",     "apellido": "Pérez",   "mail": "juan@test.com",         "celular": "351-333-4444", "password": "123456",    "rol": "USUARIO" },
+  { "id": 3, "nombre": "María",    "apellido": "López",   "mail": "maria@test.com",        "celular": "351-555-6666", "password": "pass1234",  "rol": "USUARIO" }
+]

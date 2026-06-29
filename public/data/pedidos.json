@@ -1,0 +1,39 @@
+[
+  {
+    "id": 1,
+    "fecha": "2026-06-20",
+    "estado": "TERMINADO",
+    "total": 10500,
+    "formaPago": "EFECTIVO",
+    "idUsuario": 2,
+    "detalles": [
+      { "idProducto": 1, "cantidad": 1, "subtotal": 4500 },
+      { "idProducto": 4, "cantidad": 1, "subtotal": 3800 },
+      { "idProducto": 7, "cantidad": 1, "subtotal": 1200 }
+    ]
+  },
+  {
+    "id": 2,
+    "fecha": "2026-06-24",
+    "estado": "CONFIRMADO",
+    "total": 11400,
+    "formaPago": "TARJETA",
+    "idUsuario": 2,
+    "detalles": [
+      { "idProducto": 5, "cantidad": 2, "subtotal": 10200 },
+      { "idProducto": 9, "cantidad": 1, "subtotal": 800 }
+    ]
+  },
+  {
+    "id": 3,
+    "fecha": "2026-06-26",
+    "estado": "PENDIENTE",
+    "total": 8300,
+    "formaPago": "TRANSFERENCIA",
+    "idUsuario": 3,
+    "detalles": [
+      { "idProducto": 2, "cantidad": 1, "subtotal": 5200 },
+      { "idProducto": 10, "cantidad": 1, "subtotal": 3500 }
+    ]
+  }
+]

@@ -1,120 +1,163 @@
-import { 
-    getCart, 
-    updateQuantityLogic, 
-    removeFromCartLogic, 
-    calculateTotal, 
-    updateCartCounter 
-} from "../../../utils/cart_logic";
-import { logout } from "../../../utils/auth";
-import type { IUser } from "../../../types/IUser";
+// src/pages/store/cart/cart.ts
+import type { IPedido, FormaPago } from '../../../types/types';
+import { logout, getSession } from '../../../utils/auth';
+import {
+  getCart, removeFromCart, updateQuantity,
+  clearCart, getSubtotal, getTotal, updateCartBadge, ENVIO
+} from '../../../utils/cart';
 
+// Proteger ruta
+const session = getSession();
+if (!session) { window.location.href = '/src/pages/auth/login/login.html'; throw new Error(); }
 
-const cartItemsContainer = document.getElementById("cart-items") as HTMLElement;
-const totalDisplay = document.getElementById("cart-total") as HTMLElement;
-const subtotalDisplay = document.getElementById("summary-subtotal") as HTMLElement;
-const btnLogout = document.getElementById("logoutButton") as HTMLButtonElement;
+document.getElementById('logoutButton')!.addEventListener('click', () => {
+  if (confirm('¿Cerrar sesión?')) logout();
+});
 
-const renderCartView = () => {
-    const cart = getCart();
+// --- DOM ---
+const tbody = document.getElementById('cart-items') as HTMLElement;
+const emptyMsg = document.getElementById('emptyMsg') as HTMLElement;
+const cartTable = document.getElementById('cartTable') as HTMLElement;
+const subtotalEl = document.getElementById('summary-subtotal') as HTMLElement;
+const totalEl = document.getElementById('cart-total') as HTMLElement;
+const envioEl = document.getElementById('summary-envio') as HTMLElement;
 
-    if (cart.length === 0) {
-        cartItemsContainer.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 20px;">Tu carrito está vacío.</td></tr>`;
-        totalDisplay.innerText = "$0.00";
-        subtotalDisplay.innerText = "$0.00";
-        return;
-    }
+const checkoutModal = document.getElementById('checkoutModal') as HTMLElement;
+const modalSubtotal = document.getElementById('modalSubtotal') as HTMLElement;
+const modalTotal = document.getElementById('modalTotal') as HTMLElement;
+const checkoutError = document.getElementById('checkoutError') as HTMLElement;
 
-    cartItemsContainer.innerHTML = "";
+const fmt = (n: number) => `$${n.toLocaleString('es-AR')}`;
 
-    cart.forEach((item) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-            <td>${item.nombre}</td>
-            <td>$${item.precio.toLocaleString('es-AR')}</td>
-            <td>
-                <div class="qty-controls">
-                    <button class="btn-qty" data-id="${item.id}" data-action="dec">-</button>
-                    <span class="qty-number">${item.cantidad}</span>
-                    <button class="btn-qty" data-id="${item.id}" data-action="inc">+</button>
-                </div>
-            </td>
-            <td>
-                <button class="btn-remove" data-id="${item.id}">Eliminar</button>
-            </td>
-        `;
-        cartItemsContainer.appendChild(row);
+// --- Render ---
+const renderCart = () => {
+  const cart = getCart();
+  updateCartBadge();
+
+  if (cart.length === 0) {
+    emptyMsg.style.display = 'block';
+    cartTable.style.display = 'none';
+    subtotalEl.textContent = fmt(0);
+    totalEl.innerHTML = `<strong>${fmt(0)}</strong>`;
+    envioEl.textContent = fmt(ENVIO);
+    return;
+  }
+
+  emptyMsg.style.display = 'none';
+  cartTable.style.display = 'table';
+
+  tbody.innerHTML = cart.map(item => `
+    <tr>
+      <td>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <img src="${item.imagen}" alt="${item.nombre}"
+            onerror="this.src='https://placehold.co/60x60?text=?'"
+            style="width:54px;height:54px;object-fit:cover;border-radius:8px;" />
+          <span>${item.nombre}</span>
+        </div>
+      </td>
+      <td>${fmt(item.precio)}</td>
+      <td>
+        <div class="qty-controls">
+          <button class="btn-qty" data-id="${item.id}" data-action="dec">−</button>
+          <span class="qty-number">${item.cantidad}</span>
+          <button class="btn-qty" data-id="${item.id}" data-action="inc">+</button>
+        </div>
+      </td>
+      <td>${fmt(item.precio * item.cantidad)}</td>
+      <td>
+        <button class="btn-remove" data-id="${item.id}"
+          style="background:none;border:none;color:#e53e3e;cursor:pointer;font-size:1.1rem;">🗑</button>
+      </td>
+    </tr>`).join('');
+
+  const sub = getSubtotal();
+  const tot = getTotal();
+  subtotalEl.textContent = fmt(sub);
+  totalEl.innerHTML = `<strong>${fmt(tot)}</strong>`;
+  envioEl.textContent = fmt(ENVIO);
+
+  // Eventos
+  tbody.querySelectorAll('.btn-qty').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = Number((btn as HTMLButtonElement).dataset.id);
+      const action = (btn as HTMLButtonElement).dataset.action === 'inc' ? 1 : -1;
+      const item = getCart().find(i => i.id === id);
+      const maxStock = item?.stock ?? 999;
+      updateQuantity(id, action, maxStock);
+      renderCart();
     });
+  });
 
-    const total = calculateTotal();
-    totalDisplay.innerText = `$${total.toLocaleString('es-AR')}`;
-    subtotalDisplay.innerText = `$${total.toLocaleString('es-AR')}`;
-    
-    attachEvents();
+  tbody.querySelectorAll('.btn-remove').forEach(btn => {
+    btn.addEventListener('click', () => {
+      removeFromCart(Number((btn as HTMLButtonElement).dataset.id));
+      renderCart();
+    });
+  });
 };
 
+// --- Vaciar carrito ---
+document.getElementById('btnVaciar')!.addEventListener('click', () => {
+  if (getCart().length === 0) return;
+  if (confirm('¿Vaciar el carrito?')) { clearCart(); renderCart(); }
+});
 
-const updateQuantity = (id: number, change: number) => {
-    updateQuantityLogic(id, change);
-    renderCartView();
-    updateCartCounter();
-};
+// --- Checkout modal ---
+document.getElementById('btnCheckout')!.addEventListener('click', () => {
+  if (getCart().length === 0) return;
+  modalSubtotal.textContent = fmt(getSubtotal());
+  modalTotal.textContent = fmt(getTotal());
+  checkoutModal.style.display = 'flex';
+});
 
+document.getElementById('closeModal')!.addEventListener('click', () => {
+  checkoutModal.style.display = 'none';
+});
 
-const attachEvents = () => {
+checkoutModal.addEventListener('click', (e) => {
+  if (e.target === checkoutModal) checkoutModal.style.display = 'none';
+});
 
-    document.querySelectorAll(".btn-qty").forEach(btn => {
-        btn.addEventListener("click", (e) => {
-            const button = e.currentTarget as HTMLButtonElement;
-            const id = Number(button.dataset.id);
-            const action = button.dataset.action === "inc" ? 1 : -1;
-            
-            updateQuantity(id, action);
-        });
-    });
+// --- Confirmar pedido ---
+document.getElementById('btnConfirmar')!.addEventListener('click', () => {
+  checkoutError.style.display = 'none';
 
+  const tel = (document.getElementById('checkoutTel') as HTMLInputElement).value.trim();
+  const pago = (document.getElementById('checkoutPago') as HTMLSelectElement).value as FormaPago;
 
-    document.querySelectorAll(".btn-remove").forEach(btn => {
-        btn.addEventListener("click", (e) => {
-            const button = e.currentTarget as HTMLButtonElement;
-            const id = Number(button.dataset.id);
-            
-            removeFromCartLogic(id);
-            renderCartView();
-            updateCartCounter();
-        });
-    });
-};
+  if (!tel) { checkoutError.textContent = 'El teléfono es obligatorio.'; checkoutError.style.display = 'block'; return; }
+  if (!pago) { checkoutError.textContent = 'Seleccioná un método de pago.'; checkoutError.style.display = 'block'; return; }
 
-if (btnLogout) {
-    btnLogout.addEventListener("click", (e: MouseEvent) => {
-        e.preventDefault();
+  const cart = getCart();
 
-        if (confirm("¿Estás seguro de que deseas cerrar sesión?")) {
-            logout();
-        }
-    });
-}
+  // Generar objeto pedido
+  const pedidosRaw: IPedido[] = JSON.parse(localStorage.getItem('foodstore_pedidos') || '[]');
+  const newId = Math.max(0, ...pedidosRaw.map(p => p.id)) + 1;
 
-const checkAdminAccess = () => {
-    const userData = localStorage.getItem("userData");
+  const newPedido: IPedido = {
+    id: newId,
+    fecha: new Date().toISOString().split('T')[0],
+    estado: 'PENDIENTE',
+    total: getTotal(),
+    formaPago: pago,
+    idUsuario: session.id,
+    detalles: cart.map(item => ({
+      idProducto: item.id,
+      cantidad: item.cantidad,
+      subtotal: item.precio * item.cantidad
+    }))
+  };
 
-    if (userData) {
-        const user: IUser = JSON.parse(userData);
+  pedidosRaw.push(newPedido);
+  localStorage.setItem('foodstore_pedidos', JSON.stringify(pedidosRaw));
 
-        if (user.role === 'admin') {
-            const navMenu = document.getElementById("nav-menu");
+  clearCart();
+  checkoutModal.style.display = 'none';
 
-            if (navMenu) {
-                const adminLink = document.createElement("a");
-                adminLink.href = "/src/pages/admin/home/home.html";
-                adminLink.innerText = "Panel Admin";
+  alert(`✅ ¡Pedido #${newId} confirmado!\nTotal: ${fmt(newPedido.total)}\nPago: ${pago}`);
+  window.location.href = '/src/pages/client/orders/orders.html';
+});
 
-                navMenu.prepend(adminLink);
-            }
-        }
-    }
-};
-
-checkAdminAccess();
-renderCartView();
-updateCartCounter();
+// Init
+renderCart();
