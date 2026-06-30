@@ -1,65 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🍕Carrito | FoodStore 🍕</title>
-    <link href="../../../css/cart_store.css" rel="stylesheet">
-    <link href="../../../css/home_store.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carrito | Food Store</title>
+  <link rel="stylesheet" href="../../../css/cart_store.css" />
+  <link rel="stylesheet" href="../../../css/home_store.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
-
 <body>
-    <header>
-        <div class="logo">Food<b>Store</b></div>
-        <nav id="nav-menu">
-            <a href="../home/home.html">Catálogo</a>
-            <a href="../cart/cart.html">Carrito <span id="cart-count">0</span></a>
-            <button id="logoutButton">Cerrar sesión</button>
-        </nav>
-    </header>
-    <div class="bg-store"></div>
-    <div class="cart-container">
-        <div class="cart-main">
-            <h2>Tu Carrito</h2>
-            <table class="cart-table">
-                <thead>
-                    <tr>
-                        <th>Producto</th>
-                        <th>Precio individual</th>
-                        <th>Cantidad</th>
-                        <th>Eliminar</th>
-                    </tr>
-                </thead>
-                <tbody id="cart-items">
-                </tbody>
-            </table>
-        </div>
+  <header>
+    <div class="logo">🍕 Food<b>Store</b></div>
+    <nav>
+      <a href="../home/home.html">Catálogo</a>
+      <a href="../../client/orders/orders.html">Mis Pedidos</a>
+      <a href="./cart.html">Carrito <span id="cart-count" style="display:none;">0</span></a>
+      <button id="logoutButton">Cerrar sesión</button>
+    </nav>
+  </header>
 
-        <div class="cart-summary">
-            <h3>Resumen de compra</h3>
-            <div class="summary-item">
-                <span>Subtotal</span>
-                <span id="summary-subtotal">$0.00</span>
-            </div>
-            <div class="summary-item total">
-                <span>Total</span>
-                <span id="cart-total">$0.00</span>
-            </div>
-            <button class="btn-checkout">Finalizar Compra</button>
-            <a href="../home/home.html" class="btn-back">← Continuar comprando</a>
-        </div>
+  <div class="cart-container">
+    <div class="cart-main">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+        <h2 style="margin:0;">Mi Carrito</h2>
+        <button id="btnVaciar" style="background:none;border:1px solid #e53e3e;color:#e53e3e;
+          padding:6px 14px;border-radius:6px;cursor:pointer;font-size:.85rem;">
+          Vaciar carrito
+        </button>
+      </div>
+
+      <div id="emptyMsg" style="display:none;text-align:center;padding:48px;color:#888;">
+        <p style="font-size:2rem;margin:0;">🛒</p>
+        <p>Tu carrito está vacío.</p>
+        <a href="../home/home.html" style="color:#ff6347;font-weight:600;">← Ir al catálogo</a>
+      </div>
+
+      <table class="cart-table" id="cartTable">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="cart-items"></tbody>
+      </table>
     </div>
-    <footer class="footer montserrat">
-        <div class="footer-company">
-            © 2026 Food Store. Todos los derechos reservados
-        </div>
-    </footer>
-    <script type="module" src="./cart.ts"></script>
-</body>
 
+    <div class="cart-summary">
+      <h3>Resumen del Pedido</h3>
+      <div class="summary-item">
+        <span>Subtotal</span>
+        <span id="summary-subtotal">$0</span>
+      </div>
+      <div class="summary-item">
+        <span>Envío</span>
+        <span id="summary-envio">$500</span>
+      </div>
+      <div class="summary-item total">
+        <span><strong>Total</strong></span>
+        <span id="cart-total"><strong>$0</strong></span>
+      </div>
+      <button class="btn-checkout" id="btnCheckout">Confirmar Pedido</button>
+    </div>
+  </div>
+
+  <!-- Modal Checkout -->
+  <div id="checkoutModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);
+    z-index:1000;display:none;align-items:center;justify-content:center;">
+    <div style="background:#fff;border-radius:16px;padding:32px;width:100%;max-width:480px;
+      max-height:90vh;overflow-y:auto;margin:16px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <h3 style="margin:0;">Completar Pedido</h3>
+        <button id="closeModal" style="background:none;border:none;font-size:1.4rem;cursor:pointer;">✕</button>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <label style="display:block;font-weight:600;margin-bottom:6px;">Teléfono de contacto *</label>
+        <input id="checkoutTel" type="tel" placeholder="Ej: 351-123-4567"
+          style="width:100%;padding:10px 14px;border:1px solid #ddd;border-radius:8px;
+          font-size:1rem;box-sizing:border-box;" />
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <label style="display:block;font-weight:600;margin-bottom:6px;">Dirección de entrega</label>
+        <input id="checkoutDir" type="text" placeholder="Calle, número, piso..."
+          style="width:100%;padding:10px 14px;border:1px solid #ddd;border-radius:8px;
+          font-size:1rem;box-sizing:border-box;" />
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <label style="display:block;font-weight:600;margin-bottom:6px;">Método de Pago *</label>
+        <select id="checkoutPago" style="width:100%;padding:10px 14px;border:1px solid #ddd;
+          border-radius:8px;font-size:1rem;box-sizing:border-box;">
+          <option value="">Seleccioná un método</option>
+          <option value="EFECTIVO">Efectivo</option>
+          <option value="TARJETA">Tarjeta</option>
+          <option value="TRANSFERENCIA">Transferencia</option>
+        </select>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <label style="display:block;font-weight:600;margin-bottom:6px;">Notas adicionales (opcional)</label>
+        <textarea id="checkoutNotas" placeholder="Instrucciones especiales, timbre, etc."
+          style="width:100%;padding:10px 14px;border:1px solid #ddd;border-radius:8px;
+          font-size:.95rem;box-sizing:border-box;resize:vertical;min-height:80px;"></textarea>
+      </div>
+
+      <div style="background:#fafafa;border-radius:8px;padding:16px;margin-bottom:20px;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+          <span>Subtotal</span><span id="modalSubtotal"></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+          <span>Envío</span><span>$500</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-weight:700;font-size:1.1rem;">
+          <span>Total a pagar</span><span id="modalTotal"></span>
+        </div>
+      </div>
+
+      <p id="checkoutError" style="color:#e53e3e;font-size:.85rem;display:none;margin-bottom:12px;"></p>
+
+      <button id="btnConfirmar" style="width:100%;background:#ff6347;color:#fff;border:none;
+        padding:14px;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;">
+        Confirmar Pedido
+      </button>
+    </div>
+  </div>
+
+  <footer class="footer montserrat">
+    <div class="footer-company">© 2026 Food Store. Todos los derechos reservados</div>
+  </footer>
+
+  <script type="module" src="./cart.ts"></script>
+</body>
 </html>

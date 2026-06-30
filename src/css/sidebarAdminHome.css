@@ -1,0 +1,47 @@
+:root {
+    --color-primario: #ff6347;
+    --color-fondo: #f0f0f082;
+    --color-texto: #333;
+    --color-blanco: #fff;
+    --color-negro: #0b0b0b;
+    --color-borde: #ddd;
+    --color-focus: #ff4500;
+}
+
+.sidebar-admin {
+    width: 200px;
+    min-width: 200px;
+    background: var(--color-blanco);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-right: 1px solid #eee;
+}
+
+.sidebar-admin a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    color: var(--color-negro);
+    text-decoration: none;
+    font-size: .9rem;
+    transition: .2s;
+    border-radius: 10px;
+}
+
+.sidebar-admin a.active {
+    background-color: var(--color-focus);
+    color: var(--color-blanco);
+}
+
+.sidebar-admin a:hover {
+    box-shadow: 1px 1px 5px var(--color-focus);
+}
+
+.sidebar-admin a .icon {
+    font-size: 1.1rem;
+    width: 22px;
+    text-align: center;
+}

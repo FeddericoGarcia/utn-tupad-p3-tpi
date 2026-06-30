@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel Admin | Food Store</title>
+  <link rel="stylesheet" href="../../../css/home_store.css" />
+  <link rel="stylesheet" href="../../../css/adminHome.css" />
+  <link rel="stylesheet" href="../../../css/sidebarAdminHome.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+
+</head>
+<body>
+  <header>
+    <div class="logo">🍕 Food<b>Store</b></div>
+    <nav>
+      <span id="adminName" style="font-size:.85rem;opacity:.8;"></span>
+      <a href="../../store/home/home.html">Ver Tienda</a>
+      <button id="logoutButton">Cerrar sesión</button>
+    </nav>
+  </header>
+
+  <div class="admin-layout">
+    <aside class="sidebar-admin">
+      <a href="./adminHome.html" class="active"><span class="icon">📊</span> Dashboard</a>
+      <a href="../categories/categories.html"><span class="icon">🗂</span> Categorías</a>
+      <a href="../products/products.html"><span class="icon">🍔</span> Productos</a>
+      <a href="../orders/orders.html"><span class="icon">📦</span> Pedidos</a>
+      <a href="../../store/home/home.html"><span class="icon">🛒</span> Ver Tienda</a>
+    </aside>
+
+    <main class="admin-content">
+      <h2 style="margin:0 0 24px;">Panel de Administración</h2>
+
+      <!-- Tarjetas de estadísticas -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-label">🗂 Categorías</span>
+          <span class="stat-value" id="statCategorias">—</span>
+          <span class="stat-sub" id="statCatSub">cargando...</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">🍔 Productos</span>
+          <span class="stat-value" id="statProductos">—</span>
+          <span class="stat-sub" id="statProdSub">cargando...</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">📦 Pedidos</span>
+          <span class="stat-value" id="statPedidos">—</span>
+          <span class="stat-sub" id="statPedSub">cargando...</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">✅ Disponibles</span>
+          <span class="stat-value" id="statDisponibles">—</span>
+          <span class="stat-sub">productos con stock</span>
+        </div>
+      </div>
+
+      <!-- Resumen rápido -->
+      <div class="summary-grid">
+        <div class="summary-card">
+          <h4>📦 Pedidos por Estado</h4>
+          <div id="resumenPedidos"><p>Cargando...</p></div>
+        </div>
+        <div class="summary-card">
+          <h4>🍔 Estado del Catálogo</h4>
+          <div id="resumenProductos"><p>Cargando...</p></div>
+        </div>
+        <div class="summary-card">
+          <h4>💰 Facturación</h4>
+          <div id="resumenFacturacion"><p>Cargando...</p></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="./adminHome.ts"></script>
+</body>
+</html>

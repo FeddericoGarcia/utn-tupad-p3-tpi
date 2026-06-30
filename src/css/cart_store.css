@@ -33,6 +33,7 @@ body {
     padding: 40px 15%;
     min-height: 70vh;
     overflow-x: auto;
+    background-color: #fafafa;
 }
 
 .cart-main {

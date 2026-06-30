@@ -1,70 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🍕 Login | FoodStore 🍕</title>
-    <link href="../../../css/style.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/2223cc897f.js" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | Food Store</title>
+  <link rel="stylesheet" href="../../../css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/2223cc897f.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <div class="bg-login">
-        <!--BACKGROUND IMG-->
+  <div class="bg-login"></div>
+
+  <section class="login-main">
+    <div class="login-card bg-blur">
+      <h1 class="card-title montserrat">🍕 Food<b>Store</b> 🍕</h1>
+      <h3 class="card-subtitle montserrat">Iniciar Sesión</h3>
+
+      <form id="loginForm" class="login-form">
+        <label for="inputEmail" class="label-email montserrat">Email</label>
+        <div class="div-input montserrat">
+          <i class="fa-solid fa-user"></i>
+          <input id="inputEmail" name="email" type="email" autocomplete="off" required
+            placeholder="usuario@ejemplo.com" />
+        </div>
+
+        <label for="inputPassword" class="label-pass montserrat">Contraseña</label>
+        <div class="div-input montserrat">
+          <i class="fa-solid fa-unlock-keyhole"></i>
+          <input id="inputPassword" name="password" type="password" autocomplete="off" required
+            placeholder="Mínimo 6 caracteres" />
+        </div>
+
+        <div class="forget-pass montserrat">
+          <a href="../../../assets/pag404.png" target="_blank">
+            ¿Olvidaste tu contraseña?
+          </a>
+        </div>
+
+        <p id="loginError" style="color:#e53e3e;font-size:.88rem;margin:6px 0 0;display:none;">
+          Email o contraseña incorrectos.
+        </p>
+
+        <button type="submit" class="form-btn montserrat">Ingresar</button>
+
+        <div class="create-account montserrat">
+          ¿No tenés cuenta?
+          <a href="../registro/registro.html">Registrate acá</a>
+        </div>
+
+        <div class="create-account montserrat" style="margin-top:12px;font-size:.8rem;color:#666;">
+          <strong>Demo admin:</strong> admin@foodstore.com / admin123
+          <strong>Demo usuario:</strong> juan@test.com / 123456
+        </div>
+      </form>
     </div>
-    <section class="login-main">
-        <div class="login-card bg-blur">
-            <h1 class="card-title montserrat">
-                🍕 Food<b>Store</b> 🍕
-            </h1>
-            <h3 class="card-subtitle montserrat">
-                Iniciar Sesión
-            </h3>
-            <form id="form" class="login-form ">
-                <label for="input-email" class="label-email montserrat">
-                    Email
-                </label>
-                <div class="div-input montserrat">
-                    <i class="fa-solid fa-user"></i>
-                    <input id="input-email" name="email" type="email" autocomplete="off" required
-                        title="Ingresa tu correo" placeholder="feddericogarcia@example.com">
-                </div>
-                <label for="input-pass" class="label-pass montserrat">
-                    Contraseña
-                </label>
-                <div class="div-input montserrat">
-                    <i class="fa-solid fa-unlock-keyhole"></i>
-                    <input id="input-pass" name="password" type="password" autocomplete="off" required minlength="8"
-                        pattern=".{8,}" title="Minimo 8 carácteres" placeholder="Minimo 8 carácteres">
-                </div>
-                <div class="forget-pass montserrat">
-                    <a href="../../../assets/pag404.png" target="_blank">
-                        ¿Olvidaste tu contraseña?
-                    </a>
-                </div>
-                <button type="submit" class="form-btn">
-                    Ingresar
-                </button>
-                <div class="create-account montserrat">
-                    ¿No tenes cuenta?
-                    <a href="../registro/registro.html">
-                        Registrate acá
-                    </a>
-                </div>
-            </form>
-        </div>
-    </section>
-    <footer class="footer montserrat">
-        <div class="footer-company">
-            © 2026 Food Store. Todos los derechos reservados
-        </div>
-    </footer>
-    <script type="module" src="./login.ts"></script>
+  </section>
+
+  <footer class="footer montserrat">
+    <div class="footer-company">© 2026 Food Store. Todos los derechos reservados</div>
+  </footer>
+
+  <script type="module" src="./login.ts"></script>
 </body>
 
 </html>

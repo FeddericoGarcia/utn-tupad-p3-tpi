@@ -58,11 +58,11 @@ const renderGrid = (items: IProducto[]) => {
         <div class="card-content">
           <span class="category-tag">${cat?.nombre?.toUpperCase() ?? 'SIN CAT.'}</span>
           <h3>${prod.nombre}</h3>
-          <p>${prod.descripcion}</p>
+          <p style="font-size:.75rem">${prod.descripcion}</p>
           ${!disponible
-            ? `<span style="background:#fee2e2;color:#991b1b;font-size:.75rem;padding:2px 8px;border-radius:12px;">
+            ? `<span style="width:fit-content;background:#fee2e2;color:#991b1b;font-size:.75rem;padding:2px 8px;border-radius:12px;">
                 ${prod.stock === 0 ? 'Sin stock' : 'No disponible'}</span>`
-            : `<span style="background:#d1fae5;color:#065f46;font-size:.75rem;padding:2px 8px;border-radius:12px;">Disponible</span>`
+            : `<span style="width:fit-content;background:#d1fae5;color:#065f46;font-size:.75rem;padding:2px 8px;border-radius:12px;">Disponible</span>`
           }
           <div class="card-footer">
             <span class="price">$${prod.precio.toLocaleString('es-AR')}</span>

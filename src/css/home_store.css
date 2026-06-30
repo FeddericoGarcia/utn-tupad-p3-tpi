@@ -8,7 +8,7 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Montserrat', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -23,13 +23,12 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
 }
 
 .logo {
     font-size: 1.5rem;
-    text-shadow: 2px 2px 1px var(--color-texto);
     cursor: default;
+    user-select: none;
 }
 
 nav button {
@@ -76,9 +75,13 @@ nav button:hover {
 
 .sidebar {
     width: 200px;
-    padding: 2rem 1rem;
+    padding: 0 1rem;
     border-right: 1px solid #eee;
     background: var(--white);
+}
+
+.sidebar h4 {
+    text-align: center;
 }
 
 .category-list {
@@ -98,6 +101,10 @@ nav button:hover {
 .category-item.active {
     background-color: var(--color-focus);
     color: var(--white);
+}
+
+.category-item:hover {
+    box-shadow: 1px 1px 5px var(--color-focus);
 }
 
 .content-area {
@@ -128,7 +135,7 @@ nav button:hover {
     background: var(--white);
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
     transition: transform 0.2s;
 }
 
@@ -144,6 +151,9 @@ nav button:hover {
 
 .card-content {
     padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
 }
 
 .category-tag {
@@ -178,11 +188,13 @@ nav button:hover {
 
 .btn-add {
     background-color: var(--color-primario);
-    color: white;
+    color: var(--white);
+    font-weight: 600;
     border: none;
     padding: 8px 15px;
     border-radius: 5px;
     cursor: pointer;
+    text-transform: uppercase;
 }
 
 .btn-add:hover {
@@ -196,15 +208,19 @@ nav button:hover {
     align-items: center;
     justify-content: center;
     width: 100%;
-    text-align: center;
-    margin-top: 1.3rem;
+    position: relative;
 }
 
 .footer-company {
     color: var(--color-texto);
     background-color: var(--color-blanco);
-    width: 100%;
     font-weight: 700;
-    align-self: center;
     padding: .7rem;
+    
+}
+
+#logoutButton {
+    background-color: #5e0e0084;
+    padding: .3rem;
+    border-radius: 5px;
 }

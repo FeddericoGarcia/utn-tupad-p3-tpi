@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mis Pedidos | Food Store</title>
+  <link rel="stylesheet" href="../../../css/home_store.css" />
+  <link rel="stylesheet" href="../../../css/orders.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <div class="logo">🍕 Food<b>Store</b></div>
+    <nav>
+      <a href="../../store/home/home.html">Catálogo</a>
+      <a href="./orders.html">Mis Pedidos</a>
+      <a href="../../store/cart/cart.html">
+        Carrito <span id="cart-count" style="display:none;">0</span>
+      </a>
+      <button id="logoutButton">Cerrar sesión</button>
+    </nav>
+  </header>
+
+  <main>
+    <div class="main-orders">
+      <h2>Mis Pedidos</h2>
+      <select id="filterEstado">
+        <option value="">Todos</option>
+        <option value="PENDIENTE">Pendiente</option>
+        <option value="CONFIRMADO">Confirmado</option>
+        <option value="TERMINADO">Terminado</option>
+        <option value="CANCELADO">Cancelado</option>
+      </select>
+    </div>
+
+    <div id="ordersList"><p style="color:#888;">Cargando pedidos...</p></div>
+  </main>
+
+  <!-- Modal detalle -->
+  <div id="detailModal">
+    <div id="modalContent">
+      <div id="modalHeader">
+        <h3 id="modalPedidoId"></h3>
+        <button id="closeDetail">✕</button>
+      </div>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <footer class="footer montserrat">
+    <div class="footer-company">© 2026 Food Store. Todos los derechos reservados</div>
+  </footer>
+
+  <script type="module" src="./orders.ts"></script>
+</body>
+</html>
